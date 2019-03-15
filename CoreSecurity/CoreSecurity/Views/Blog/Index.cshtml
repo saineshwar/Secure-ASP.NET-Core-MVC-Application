@@ -1,0 +1,54 @@
+﻿@model IEnumerable<CoreSecurity.Models.Comments>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                <label>UrlEncode</label>
+            </th>         
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                    @*Html.Raw not encoded Html*@
+                    @*Html.Raw will allow executing any script that is on the value to display.*@
+                    @*@Html.Raw(item.Comment)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CommentId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.CommentId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CommentId">Delete</a> |
+                    <a href="/Blog/ShowDetails?emailId=@System.Net.WebUtility.UrlEncode(Convert.ToString(item.EmailId))">UrlEncode</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

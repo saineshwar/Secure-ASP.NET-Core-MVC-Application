@@ -1,0 +1,87 @@
+﻿@model CoreSecurity.Models.LoginModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LayoutCommon.cshtml";
+}
+
+<h2>Login</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-antiforgery="true" name="frm" asp-action="Login">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control"/>
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control"/>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="RememberMe"/> @Html.DisplayNameFor(model => model.RememberMe)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+
+                <input type="hidden" asp-for="HdrandomSeed" class="form-control"/>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" id="btnLogin" value="Login" 
+                       class="btn btn-default"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/md5.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnLogin').click(function ()
+        {
+            if ($('#Password').val() != "")
+            {
+                var seed = $('#HdrandomSeed');
+                return md5auth(seed.val());
+            }
+            $("#frm").submit();
+        });
+    });
+   
+    $(function () {
+        var controls = $(".disable");
+        controls.bind("paste", function () {
+            return false;
+        });
+        controls.bind("drop", function () {
+            return false;
+        });
+        controls.bind("cut", function () {
+            return false;
+        });
+        controls.bind("copy", function () {
+            return false;
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    function md5auth(seed)
+    {
+        var password1 = $('#Password');
+        var password = password1.val();
+        var hash = calcMD5(seed + calcMD5(password).toUpperCase());
+        password1.val(hash.toUpperCase());
+        return true;
+    }
+</script>
