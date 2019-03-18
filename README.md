@@ -3,16 +3,16 @@
 
 
 ## Introduction
-1.Broken authentication and session management  
-2.Sensitive Data Exposure & Audit trail  
-3.Cross-Site Scripting (XSS) attacks  
-4.Malicious File Upload  
-5.Security Misconfiguration (Error Handling Must Setup Custom Error Page)  
-6.Version Discloser  
-7.Cross-Site Request Forgery (CSRF)  
-8.XML External Entities (XXE)  
-9.Insecure Deserialization  
-10.SQL Injection Attack  
+1. Broken authentication and session management  
+2. Sensitive Data Exposure & Audit trail  
+3. Cross-Site Scripting (XSS) attacks  
+4. Malicious File Upload  
+5. Security Misconfiguration (Error Handling Must Setup Custom Error Page)  
+6. Version Discloser  
+7. Cross-Site Request Forgery (CSRF)  
+8. XML External Entities (XXE)  
+9. Insecure Deserialization  
+10. SQL Injection Attack  
 
 We are new to the .NET Core Framework and we are using it for developing production applications, but when we develop a production application we must also think of security. So, in this article, we will run through 10 points which will help us to make our ASP.NET Core MVC code secure.
 
